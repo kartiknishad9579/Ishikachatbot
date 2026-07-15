@@ -1,6 +1,6 @@
 import asyncio
-from ishikachat import app, LOGGER
-from ishikachat.modules.helpers.mongo import mongoping
+from Ishikachat import app, LOGGER
+from Ishikachat.modules.helpers.mongo import mongoping
 
 async def main():
     await app.start()
