@@ -1,10 +1,9 @@
-import os
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 
-MONGO_DB_URI = os.getenv("MONGO_DB_URI")
+from ishika.config import MONGO_DB_URI
 
-_client = MongoClient(MONGO_DB_URI)
+_client = MongoClient(MONGO_DB_URI, serverSelectionTimeoutMS=5000)
 IshikaDB = _client["IshikaChatDB"]
 
 afk = IshikaDB.afk
@@ -13,6 +12,11 @@ filters = IshikaDB.filters
 welcome = IshikaDB.welcome
 couples = IshikaDB.couples
 
+
 async def mongoping():
-    _client.admin.command('ping')
-    print("[Ishika] MongoDB Connected ✅")
+    try:
+        _client.admin.command("ping")
+        print("[Ishika] MongoDB Connected ✅")
+    except ServerSelectionTimeoutError as e:
+        print(f"[Ishika] MongoDB Connection Failed ❌ -> {e}")
+        raise
