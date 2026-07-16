@@ -1,20 +1,17 @@
 import asyncio
 import os
-
 from aiohttp import web
+from pyrogram import filters
 
 from ishika import app, LOGGER
 from ishika.modules.helpers.mongo import mongoping
 
-
 async def health(_request):
     return web.Response(text="Ishika is alive ✅")
 
-
 async def run_web_server():
     """Binds a tiny HTTP server so Render's Web Service sees an open port.
-    Also gives you a URL to ping (e.g. with UptimeRobot) to stop the free
-    instance from spinning down after 15 minutes of inactivity."""
+    Also gives you a URL to ping to stop the free instance from spinning down."""
     port = int(os.environ.get("PORT", 8080))
     web_app = web.Application()
     web_app.router.add_get("/", health)
@@ -25,6 +22,9 @@ async def run_web_server():
     await site.start()
     LOGGER.info(f"Health-check server listening on port {port}")
 
+@app.on_message(filters.command("start"))
+async def start_cmd(client, message):
+    await message.reply("Hey! Main Ishika hun 💜 Kya haal hai?")
 
 async def main():
     await mongoping()
@@ -32,7 +32,6 @@ async def main():
     await app.start()
     LOGGER.info("IshikaChatBot Started Successfully ✅")
     await asyncio.Event().wait()
-
 
 if __name__ == "__main__":
     asyncio.run(main())
