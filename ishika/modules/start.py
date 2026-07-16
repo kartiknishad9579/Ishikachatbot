@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.types import Message
-from ishikachat import app
-from ishikachat.modules.helpers.inline import start_panel
+from ishika import app
+from ishika.modules.helpers.inline import start_panel
 
 BOT_NAME = "Ishika"
 
