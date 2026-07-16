@@ -10,12 +10,9 @@ async def health(_request):
     return web.Response(text="Ishika is alive ✅")
 
 async def run_web_server():
-    """Binds a tiny HTTP server so Render's Web Service sees an open port.
-    Also gives you a URL to ping to stop the free instance from spinning down."""
     port = int(os.environ.get("PORT", 8080))
     web_app = web.Application()
     web_app.router.add_get("/", health)
-
     runner = web.AppRunner(web_app)
     await runner.setup()
     site = web.TCPSite(runner, "0.0.0.0", port)
@@ -31,7 +28,7 @@ async def main():
     await run_web_server()
     await app.start()
     LOGGER.info("IshikaChatBot Started Successfully ✅")
-    await asyncio.Event().wait()
+    await app.idle()  
 
 if __name__ == "__main__":
     asyncio.run(main())
