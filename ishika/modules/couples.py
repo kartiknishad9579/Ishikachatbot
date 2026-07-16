@@ -2,8 +2,8 @@ from datetime import datetime
 import random
 from pyrogram import filters
 from pyrogram.types import Message
-from ishikachat import app
-from ishikachat.modules.helpers.mongo import couples
+from ishika import app
+from ishika.modules.helpers.mongo import couples
 
 BOT_NAME = "Ishika"
 
