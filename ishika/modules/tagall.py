@@ -1,7 +1,7 @@
 import asyncio
 from pyrogram import filters, enums
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from ishikachat import app
+from ishika import app
 
 BOT_NAME = "Ishika"
 SPAM_CHATS = []
