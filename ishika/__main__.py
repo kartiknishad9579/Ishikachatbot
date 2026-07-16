@@ -25,10 +25,10 @@ async def start_cmd(client, message):
 
 async def main():
     await mongoping()
-    await run_web_server()
-    await app.start()
+    await run_web_server()  # health server start
+    await app.start()       # bot start
     LOGGER.info("IshikaChatBot Started Successfully ✅")
-    await app.idle()  
+    await asyncio.Event().wait()  # bot ko zinda rakho
 
 if __name__ == "__main__":
     asyncio.run(main())
