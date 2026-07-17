@@ -18,7 +18,7 @@ def start_panel():
 async def start(client, message: Message):
     LOGGER.info(f"[Ishika] /start hit by {message.from_user.id}")
     await message.reply_photo(
-        photo="https://graph.org/file/c2d2b7beeb5d3a8b2b1a1.jpg",
+        photo="https://i.ibb.co/Nd4GDnt6/IMG-20260714-WA5521.jpg", # ✅ Naya link daal diya
         caption=f"**Hey {message.from_user.mention}**\n"
                 f"**I am {BOT_NAME}** ✨\n"
                 f"**Advanced Group Manager Bot**\n"
