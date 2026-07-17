@@ -1,12 +1,16 @@
 import asyncio
+import glob
 from ishika import app
 from ishika.modules.helpers.mongo import mongoping
 from ishika.config import LOGGER
 
 async def load_modules():
-    """Saare modules auto load karega"""
-    from ishika.modules import start
-    LOGGER.info("[Ishika] Loaded module: Start")
+    path = "ishika/modules/*.py"
+    files = glob.glob(path)
+    for name in files:
+        module_name = name.replace("ishika/modules/", "").replace(".py", "")
+        __import__(f"ishika.modules.{module_name}")
+        LOGGER.info(f"[Ishika] Loaded module: {module_name}")
 
 async def main():
     await mongoping()
@@ -16,8 +20,6 @@ async def main():
     me = await app.get_me()
     LOGGER.info(f"[Ishika] Bot logged in as @{me.username} ✅")
     LOGGER.info("[Ishika] IshikaChatBot Started Successfully ✅")
-    
     await app.idle()
-    await app.stop()
 
 app.run()
