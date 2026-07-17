@@ -8,10 +8,11 @@ BOT_NAME = "Ishika"
 def start_panel():
     return InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("➕ Add Me", url="https://t.me/IshikaBot?startgroup=true"),
-            InlineKeyboardButton("💭 Support", url="https://t.me/Ishika_Support")
+            InlineKeyboardButton("➕ Add Me", url="https://t.me/Ishika_Baby_bot?startgroup=true"),
+            InlineKeyboardButton("💭 Support", url="https://t.me/ishika_chat")
+            InlineKeyboardButton("❤️ OWNER", url="https://t.me/KARTIK_NISHAD_3")
         ],
-        [InlineKeyboardButton("💬 Channel", url="https://t.me/Ishika_Updates")]
+        [InlineKeyboardButton("💬 Channel", url="https://t.me/ye_duniya_ek_sapna_he")]
     ])
 
 @app.on_message(filters.command("start") & filters.private)
