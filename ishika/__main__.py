@@ -1,13 +1,13 @@
 import asyncio
-from pyrogram import Client, filters
+from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ishika import app
 from ishika.modules.helpers.mongo import mongoping
 from ishika.config import LOGGER
 
-# Yaha seedha handler
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command("start") & filters.private)
 async def start(_, message):
+    LOGGER.info(f"[Ishika] /start command received from {message.from_user.id}")
     await message.reply_photo(
         photo="https://graph.org/file/c2d2b7beeb5d3a8b2b1a1.jpg",
         caption=f"Hey {message.from_user.first_name} I Am Ishika Chatbot\n"
