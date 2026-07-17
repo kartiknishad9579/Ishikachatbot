@@ -13,3 +13,11 @@ BOT_NAME = "Ishika"
 BOT_USERNAME = os.getenv("BOT_USERNAME", "Ishika_Baby_bot")
 OWNER_ID = int(os.getenv("OWNER_ID", "0"))
 SUPPORT_GROUP = os.getenv("SUPPORT_GROUP", "https://t.me/ishika_support")
+import logging
+
+logging.basicConfig(
+    format='[%(asctime)s] [%(levelname)s] - %(message)s',
+    level=logging.INFO,
+    datefmt='%d-%b-%y %H:%M:%S'
+)
+LOGGER = logging.getLogger(__name__)
