@@ -1,6 +1,7 @@
 from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from ishika import app
+from ishika.config import LOGGER
 
 BOT_NAME = "Ishika"
 
@@ -15,6 +16,7 @@ def start_panel():
 
 @app.on_message(filters.command("start") & filters.private)
 async def start(client, message: Message):
+    LOGGER.info(f"[Ishika] /start hit by {message.from_user.id}")
     await message.reply_photo(
         photo="https://graph.org/file/c2d2b7beeb5d3a8b2b1a1.jpg",
         caption=f"**Hey {message.from_user.mention}**\n"
