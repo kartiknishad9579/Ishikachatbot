@@ -5,9 +5,7 @@ from ishika import app, LOGGER
 from ishika.config import BOT_USERNAME
 from ishika.modules.helpers.gemini import ask_gemini
 
-# Commands handled elsewhere - the chatbot should never intercept these
 KNOWN_COMMANDS = ["start", "tagall", "all", "stop", "tagadmins", "taghelp", "couple"]
-
 
 async def replied_to_bot(_, client, message: Message) -> bool:
     return bool(
@@ -17,7 +15,6 @@ async def replied_to_bot(_, client, message: Message) -> bool:
         and message.reply_to_message.from_user.id == client.me.id
     )
 
-
 REPLIED_TO_BOT = filters.create(replied_to_bot)
 
 CHATBOT_FILTER = (
@@ -26,7 +23,6 @@ CHATBOT_FILTER = (
     & ~filters.command(KNOWN_COMMANDS)
     & (filters.private | filters.mentioned | REPLIED_TO_BOT)
 )
-
 
 @app.on_message(CHATBOT_FILTER)
 async def chatbot_reply(client, message: Message):
@@ -41,7 +37,7 @@ async def chatbot_reply(client, message: Message):
     await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
 
     try:
-        reply = await ask_gemini(prompt)
+        reply = await ask_gemini(prompt, message.from_user.id) # user_id bhi bheja memory ke liye
     except Exception as e:
         LOGGER.error(f"Gemini error: {e}")
         reply = "Abhi thodi dikkat aa rahi hai, thodi der baad try karo 🙏"
