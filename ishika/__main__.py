@@ -1,32 +1,22 @@
 import asyncio
-import signal
-from ishika import app, LOGGER
+from pyrogram import Client
 from ishika.modules.helpers.mongo import mongoping
+from ishika.config import API_ID, API_HASH, BOT_TOKEN, LOGGER
 
-async def shutdown():
-    """Graceful shutdown"""
-    LOGGER.info("Shutting down IshikaBot...")
-    await app.stop()
-    await app.shutdown()
+app = Client(
+    "IshikaBot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
+)
 
 async def main():
-    # 1. Mongo Connect
-    LOGGER.info("Connecting to MongoDB...")
     await mongoping()
-    
-    # 2. Bot Start
     await app.start()
     me = await app.get_me()
-    LOGGER.info(f"Bot logged in as @{me.username} ✅")
-    LOGGER.info("IshikaChatBot Started Successfully ✅")
-    
-    # 3. Run Bot
-    await app.run_polling(allowed_updates=["message", "callback_query"])
+    LOGGER.info(f"[Ishika] Bot logged in as @{me.username} ✅")
+    LOGGER.info("[Ishika] IshikaChatBot Started Successfully ✅")
+    await app.idle()
+    await app.stop()
 
-if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        LOGGER.info("Bot stopped by user")
-    except Exception as e:
-        LOGGER.error(f"Fatal error: {e}")
+app.run()
