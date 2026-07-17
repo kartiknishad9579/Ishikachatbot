@@ -29,7 +29,7 @@ async def main():
     LOGGER.info(f"[Ishika] MongoDB Connected ✅")
     LOGGER.info(f"[Ishika] Bot logged in as @{me.username} ✅")
     LOGGER.info(f"[Ishika] Handler Registered ✅")
-    await app.idle()
+    await asyncio.Event().wait() # <-- ye line change ki hai
 
 if __name__ == "__main__":
     asyncio.run(main())
