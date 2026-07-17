@@ -10,7 +10,4 @@ app = Client(
     workers=32
 )
 
-from ishika import handlers 
-
-LOGGER.info("[Ishika] Starting Bot...")
-app.run()
+LOGGER.info("[Ishika] Client Created...")
