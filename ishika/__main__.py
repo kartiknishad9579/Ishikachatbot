@@ -31,4 +31,5 @@ async def main():
     LOGGER.info(f"[Ishika] Handler Registered ✅")
     await app.idle()
 
-app.run()
+if __name__ == "__main__":
+    asyncio.run(main())
